@@ -22,6 +22,6 @@ return Application::configure(basePath: dirname(__DIR__))
             if($request->wantsJson()){
                 return response()->json(['message' => 'Object not found'], 404);
             }
-            
+
         });
     })->create();
