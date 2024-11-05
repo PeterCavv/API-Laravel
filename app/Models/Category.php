@@ -25,8 +25,4 @@ class Category extends Model
             'name' => 'required'
         ];
     }
-    public funcion messages(){
-        return [
-            'name' => 'required'
-    }
 }

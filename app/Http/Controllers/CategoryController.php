@@ -25,8 +25,20 @@ class CategoryController extends Controller
         return CategoryResource::collection(Category::all());
     }
 
-    public function store(Request $request){
-        $category = Category::create($request->all());;
+    public function store(StoreCategoryRequest $request){
+
+        $data = $request->all();
+
+        if($request->hasFile('photo')){
+            $file = $request->file('photo');
+            $name = 'categories/'.Str::uuid().'.'. $file->extension();
+            $file->storeAs('categories', $name, 'public');
+            $data['photo'] = $name;
+        }
+
+        $category = Category::create($data);
+
+        return new CategoryResource($category);
     }
 
     public function update(Category $category, StoreCategoryRequest $request){
